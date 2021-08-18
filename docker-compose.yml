@@ -13,13 +13,13 @@ services:
     depends_on:
       - tileserver
 
-  # static_server:
-  #   build:
-  #     context: ./static_server
-  #   ports:
-  #     - 3001:3001
-  #   depends_on:
-  #     - tileserver
+  static_server:
+    build:
+      context: ./static_server
+    ports:
+      - 3001:3001
+    depends_on:
+      - tileserver
 
   tileserver:
     image: maptiler/tileserver-gl
