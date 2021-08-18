@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  map:
+    build:
+      context: ./map
+      args:
+        - TILESERVER_ENDPOINT=${TILESERVER_ENDPOINT}
+    volumes:
+      - ./map/:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - tileserver
+
+  # static_server:
+  #   build:
+  #     context: ./static_server
+  #   ports:
+  #     - 3001:3001
+  #   depends_on:
+  #     - tileserver
+
+  tileserver:
+    image: maptiler/tileserver-gl
+    ports:
+      - 8100:8100
+    volumes:
+      - ./tileserver/:/data
+    command: "--verbose --port 8100" # --log_file tileserver-gl.log --silent
